@@ -43,12 +43,13 @@ def plot_3d_point(list):
     return plot_figure
 
 #---------------------------------------
-def plot_arrow_tip(point_pair):
+def plot_arrow_tip(point_pair, sizetip=0.5):
     """
-    This function plots a vector tip cone from head and tail.
+    Plots a vector tip cone from head and tail.
 
     Args:
         point_pair (list): A list of two points, the first point is the tail and the second point is the head.
+        sizetip (float): The size of the cone tip. (default=0.5)
 
     Returns:
         fig (go.Figure): A plotly figure object.
@@ -76,7 +77,7 @@ def plot_arrow_tip(point_pair):
         
         showscale=False,
         sizemode="scaled",
-        sizeref=0.1,
+        sizeref=sizetip,
         anchor="tip"))
     
     fig.update_layout(title = '3D Vector Tip Plot',width=500,height=400,)
@@ -93,7 +94,7 @@ def plot_3d_line(list):
 
     Returns:
         go.Figure.
-    """    
+    """
     x_data=[list[i][0] for i in range(len(list))]
     y_data=[list[i][1] for i in range(len(list))]
     z_data=[list[i][2] for i in range(len(list))]
@@ -120,23 +121,24 @@ def plot_3d_line(list):
     
 #---------------------------------------
 
-def plot_lines_from_points(first_pair, *list_pair):
+def plot_lines_from_points(first_pair, *list_pair, size_tip=0.1):
     """
     Plots a series of 3D lines from a list of 3D points.
 
     Args:
         list_pair (list): lists of 3D points. Each list is a list of points that form a line.
+        sizetip (float)=The size of the cone tip. (default=0.5)
 
     Returns:
         go.Figure.
     """
     fig1  = plot_3d_line(first_pair)
-    fig0 = plot_arrow_tip(first_pair)
+    fig0 = plot_arrow_tip(first_pair,sizetip=size_tip)
     fig = go.Figure(data=fig1.data + fig0.data)
     
     for pair in list_pair:
         fig1= plot_3d_line(pair)
-        fig0 = plot_arrow_tip(pair)
+        fig0 = plot_arrow_tip(pair, sizetip=size_tip)
         
         fig2 = go.Figure(data=fig.data + fig1.data + fig0.data)
         fig = fig2
