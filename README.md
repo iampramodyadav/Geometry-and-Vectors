@@ -1,3 +1,5 @@
 # Geometric and vector operations
 
-[Coordinate Transformation](https://github.com/iampramodyadav/Dash-plotly/tree/main)
+**[Taylor Series](https://github.com/iampramodyadav/Geometry-and-Vectors/blob/main/TaylorSeries.ipynb)**
+
+**[Coordinate Transformation](https://github.com/iampramodyadav/Dash-plotly/tree/main)**
