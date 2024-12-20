@@ -166,7 +166,32 @@ def surf_plot(x_data, y_data, z_data):
     layout = go.Layout(title = '3D Surface plot',width=700,height=400,margin={'l': 0, 'r': 0, 'b': 0, 't': 30})
     fig = go.Figure(data = data, layout=layout)
     fig.show()
+    
+#---------------------------------------
+def plot_surf(A=1, B=1, n=1, m=1, D=0, p=1, x_lim=[-10, 10], y_lim=[-10, 10]):
+    """
+    $z = (D-Ax^n+By^m)^p$
 
+    """
+    x = np.linspace(x_lim[0], x_lim[1], 100)
+    y = np.linspace(y_lim[0], y_lim[1], 100)
+
+    xGrid, yGrid = np.meshgrid(y, x)
+
+    z = (D + A * xGrid**n + B * yGrid**m) ** p
+    fig = go.Figure()
+
+    fig.add_trace(
+        go.Surface(x=x, y=y, z=z, colorscale="Viridis", showscale=False),
+    )
+    fig.update_layout(
+        margin={"l": 0, "r": 0, "b": 0, "t": 30},
+        title="3D Surface Plot",
+        width=800,
+        height=600,
+    )
+
+    return fig
 if __name__ == "__main__":
     #------------------------------
     list_point=[[1,3,3],
@@ -190,6 +215,9 @@ if __name__ == "__main__":
     list4=[[0,0,0],[1,1,1]]
     fig3=plot_lines_from_points(list1,list2,list3,list4)
     fig3.show()
+    #------------------------------
+    fig1 = plot_surf(A=1, B=1, n=2, m=2, D=0, p=1, x_lim=[-100, 100], y_lim=[-100, 100])
+    fig1.show()
 
 
 
